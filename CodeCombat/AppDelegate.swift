@@ -9,7 +9,7 @@
 import UIKit
 import HockeySDK
 
-let rootURL = NSURL(string: "http://localhost:3000/")!
+let rootURL = NSURL(string: "http://hackathon.reindeerjob.com")!
 //let rootURL = NSURL(string: "https://codecombat.com:443/")!
 
 @UIApplicationMain

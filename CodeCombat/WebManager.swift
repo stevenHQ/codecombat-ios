@@ -12,7 +12,7 @@ class WebManager: NSObject, WKScriptMessageHandler, WKNavigationDelegate {
   
 	var webViewConfiguration: WKWebViewConfiguration!
 	var urlSesssionConfiguration: NSURLSessionConfiguration?
-	let allowedRoutePrefixes = ["http://localhost:3000", "https://codecombat.com"]
+	let allowedRoutePrefixes = ["http://hackathon.reindeerjob.com", "https://codecombat.com"]
 	var operationQueue: NSOperationQueue?
 	var webView: WKWebView?  // Assign this if we create one, so that we can evaluate JS in its context.
 	var lastJSEvaluated: String?
@@ -33,7 +33,7 @@ class WebManager: NSObject, WKScriptMessageHandler, WKNavigationDelegate {
   
   func checkReachibility() {
     NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("reachibilityChanged:"), name: kReachabilityChangedNotification, object: nil)
-    hostReachibility = Reachability(hostName: "codecombat.com")
+    hostReachibility = Reachability(hostName: "reindeerjob.com")
     hostReachibility.startNotifier()
   }
   

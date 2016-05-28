@@ -184,9 +184,9 @@ class IAPHelper: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserv
   
   func failedTransaction(transaction:SKPaymentTransaction) {
     print("Failed transaction")
-    if transaction.error?.code != SKErrorPaymentCancelled {
-      print("Transaction error: \(transaction.error!.localizedDescription)")
-    }
+//    if transaction.error?.code != SKErrorPaymentCancelled {
+//      print("Transaction error: \(transaction.error!.localizedDescription)")
+//    }
     SKPaymentQueue.defaultQueue().finishTransaction(transaction)
   }
   
