@@ -65,11 +65,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GDWebViewControllerDelega
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        navVC.setViewControllers([webVC], animated: false)
+        navVC.setViewControllers([webVC], animated: true)
         window?.rootViewController = navVC
         window?.makeKeyAndVisible()
         
         webVC.delegate = self
+        webVC.navigationController?.navigationBarHidden = true
         webVC.loadURLWithString(gHost)
         webVC.toolbar.toolbarTintColor = UIColor.darkGrayColor()
         webVC.toolbar.toolbarBackgroundColor = UIColor.whiteColor()
@@ -77,7 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GDWebViewControllerDelega
         webVC.allowsBackForwardNavigationGestures = true
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW,Int64(1 * Double(NSEC_PER_SEC))),dispatch_get_main_queue(), {
-            self.webVC.showToolbar(true, animated: true)
+            self.webVC.showToolbar(false, animated: true)
         })
         
         return true
