@@ -1,32 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9058" systemVersion="15B22c" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9048"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
         <!--Play View Controller-->
         <scene sceneID="U59-z1-lGZ">
             <objects>
                 <viewController storyboardIdentifier="PlayViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="mL5-Kq-7bx" customClass="PlayViewController" customModule="CodeCombat" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="xB9-Hc-fWF"/>
-                        <viewControllerLayoutGuide type="bottom" id="r7h-op-gb1"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="GQf-52-blM">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView hidden="YES" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="play_background" translatesAutoresizingMaskIntoConstraints="NO" id="XTe-fX-TVu">
+                            <imageView hidden="YES" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="play_background" id="XTe-fX-TVu">
                                 <rect key="frame" x="0.0" y="109" width="1024" height="659"/>
-                                <animations/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView hidden="YES" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="play_background_bottom" translatesAutoresizingMaskIntoConstraints="NO" id="o1a-7D-j7k">
+                            <imageView hidden="YES" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="play_background_bottom" id="o1a-7D-j7k">
                                 <rect key="frame" x="0.0" y="695" width="1011" height="73"/>
-                                <animations/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uGs-wC-Lym">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="uGs-wC-Lym">
                                 <rect key="frame" x="885" y="715" width="113" height="45"/>
-                                <animations/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Futura-CondensedExtraBold" family="Futura" pointSize="18"/>
                                 <state key="normal" title="SUBMIT" backgroundImage="large_green_active">
                                     <color key="titleColor" red="1" green="0.74104259174095843" blue="0.48882501297454573" alpha="1" colorSpace="calibratedRGB"/>
@@ -38,9 +34,9 @@
                                     <action selector="onCodeSubmitted:" destination="mL5-Kq-7bx" eventType="touchUpInside" id="uYl-wp-v6A"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SkL-FP-pol">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="SkL-FP-pol">
                                 <rect key="frame" x="774" y="715" width="113" height="45"/>
-                                <animations/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Futura-CondensedExtraBold" family="Futura" pointSize="18"/>
                                 <state key="normal" title="RUN" backgroundImage="large_button_inactive">
                                     <color key="titleColor" red="0.74142278439153442" green="0.5512918464294071" blue="0.35825157513350053" alpha="1" colorSpace="calibratedRGB"/>
@@ -55,9 +51,9 @@
                                     <action selector="onCodeRun:" destination="mL5-Kq-7bx" eventType="touchUpInside" id="Jcn-Vq-Gen"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yWl-nf-cCN">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yWl-nf-cCN">
                                 <rect key="frame" x="550" y="728" width="98" height="34"/>
-                                <animations/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Futura-CondensedExtraBold" family="Futura" pointSize="14"/>
                                 <inset key="imageEdgeInsets" minX="-12" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" title="UNDO" image="undo_icon" backgroundImage="small_button_active">
@@ -73,9 +69,9 @@
                                     <action selector="onUndo:" destination="mL5-Kq-7bx" eventType="touchUpInside" id="a0Z-kk-CeT"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZvF-zO-AH3">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ZvF-zO-AH3">
                                 <rect key="frame" x="650" y="728" width="98" height="34"/>
-                                <animations/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Futura-CondensedExtraBold" family="Futura" pointSize="14"/>
                                 <inset key="imageEdgeInsets" minX="-12" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" title="REDO" image="redo_icon" backgroundImage="small_button_active">
@@ -91,9 +87,9 @@
                                     <action selector="onRedo:" destination="mL5-Kq-7bx" eventType="touchUpInside" id="utY-xp-0Hh"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lwx-zM-L4H">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="lwx-zM-L4H">
                                 <rect key="frame" x="350" y="728" width="100" height="34"/>
-                                <animations/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Futura-CondensedExtraBold" family="Futura" pointSize="14"/>
                                 <state key="normal" title="RESET CODE" backgroundImage="small_button_active">
                                     <color key="titleColor" red="0.74142278439999998" green="0.55129184639999995" blue="0.3582515751" alpha="1" colorSpace="calibratedRGB"/>
@@ -108,9 +104,9 @@
                                     <action selector="onClickResetCode:" destination="mL5-Kq-7bx" eventType="touchUpInside" id="pa9-tt-rwP"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OTR-hY-aNL">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="OTR-hY-aNL">
                                 <rect key="frame" x="450" y="728" width="100" height="34"/>
-                                <animations/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Futura-CondensedExtraBold" family="Futura" pointSize="14"/>
                                 <state key="normal" title="KEYBOARD" backgroundImage="small_button_active">
                                     <color key="titleColor" red="0.74142278439999998" green="0.55129184639999995" blue="0.3582515751" alpha="1" colorSpace="calibratedRGB"/>
@@ -126,7 +122,6 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>

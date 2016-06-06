@@ -87,8 +87,11 @@ struct User {
 	}
 
 	private static let protectionSpace: NSURLProtectionSpace? = {
-		guard let host = rootURL.host, port = rootURL.port?.integerValue else { return nil }
-		return NSURLProtectionSpace(host: host, port: port, `protocol`: rootURL.scheme, realm: nil, authenticationMethod: nil)
+		guard let host = rootURL.host//, port = rootURL.port?.integerValue
+            else {
+                return nil
+        }
+		return NSURLProtectionSpace(host: host, port: 0, `protocol`: rootURL.scheme, realm: nil, authenticationMethod: nil)
 	}()
 
 	private static func randomPassword() -> String {

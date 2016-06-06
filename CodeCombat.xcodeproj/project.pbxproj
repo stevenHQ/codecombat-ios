@@ -95,7 +95,6 @@
 		28DE0CDD1999305700C6699D /* TomeInventoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DE0CDC1999305700C6699D /* TomeInventoryViewController.swift */; };
 		28DE0CFF199AE1D600C6699D /* javascriptSyntax.json in Resources */ = {isa = PBXBuildFile; fileRef = 28DE0CFE199AE1D600C6699D /* javascriptSyntax.json */; };
 		28DFD0B619FBFBA400C302F0 /* EditorInputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DFD0B519FBFBA400C302F0 /* EditorInputAccessoryView.swift */; };
-		52DF7D271CFD7B1500F292CE /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DF7D261CFD7B1500F292CE /* WebViewController.swift */; };
 		52DF7D2B1CFD7CB800F292CE /* GDWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DF7D291CFD7CB800F292CE /* GDWebViewController.swift */; };
 		52DF7D2C1CFD7CB800F292CE /* GDWebViewNavigationToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DF7D2A1CFD7CB800F292CE /* GDWebViewNavigationToolbar.swift */; };
 		C824BEF719FC11F50097AE14 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C824BEF619FC11F50097AE14 /* AssetsLibrary.framework */; };
@@ -252,7 +251,6 @@
 		28DE0CDC1999305700C6699D /* TomeInventoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TomeInventoryViewController.swift; sourceTree = "<group>"; };
 		28DE0CFE199AE1D600C6699D /* javascriptSyntax.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = javascriptSyntax.json; sourceTree = "<group>"; };
 		28DFD0B519FBFBA400C302F0 /* EditorInputAccessoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditorInputAccessoryView.swift; sourceTree = "<group>"; };
-		52DF7D261CFD7B1500F292CE /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		52DF7D291CFD7CB800F292CE /* GDWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GDWebViewController.swift; sourceTree = "<group>"; };
 		52DF7D2A1CFD7CB800F292CE /* GDWebViewNavigationToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GDWebViewNavigationToolbar.swift; sourceTree = "<group>"; };
 		C824BEF619FC11F50097AE14 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
@@ -487,7 +485,6 @@
 				21162BE91BC5996B00910240 /* RootViewController.swift */,
 				287AE0C01992927300EEE4F0 /* SignInViewController.swift */,
 				C87236FC19FABD760077BD3B /* GameViewController.swift */,
-				52DF7D261CFD7B1500F292CE /* WebViewController.swift */,
 				28BA9B541992D580006ACB3A /* Play */,
 				2873D9841A11883E006358BA /* MemoryWarningViewController.swift */,
 				2873D9851A11883E006358BA /* MemoryWarningViewController.xib */,
@@ -859,7 +856,6 @@
 				285A542C199C34BD00932DDE /* regenc.c in Sources */,
 				285A5426199C34BD00932DDE /* OnigRegexp.m in Sources */,
 				216DCBA41BC5BEA20054FBFF /* SignInBackgroundView.swift in Sources */,
-				52DF7D271CFD7B1500F292CE /* WebViewController.swift in Sources */,
 				287AE108199294CC00EEE4F0 /* ParticleScene.swift in Sources */,
 				28C650CC1A0534AC006220EA /* NumberPickerPopoverViewController.swift in Sources */,
 				285A542D199C34BD00932DDE /* regerror.c in Sources */,
