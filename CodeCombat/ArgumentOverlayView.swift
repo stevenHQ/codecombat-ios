@@ -29,10 +29,10 @@ class ArgumentOverlayView: UIButton, StringPickerPopoverDelegate {
     setupDefaultLabel()
     resetLocationToCurrentCharacterRange()
     
-    addTarget(self, action: Selector("onTapped"), forControlEvents: .TouchUpInside)
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("onCodeRun"), name: "codeRun", object: nil)
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("onOverlayHideRequest"), name: "overlayHideRequest", object: nil)
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("onOverlayUnhideRequest"), name: "overlayUnhideRequest", object: nil)
+    addTarget(self, action: #selector(ArgumentOverlayView.onTapped), forControlEvents: .TouchUpInside)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ArgumentOverlayView.onCodeRun), name: "codeRun", object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ArgumentOverlayView.onOverlayHideRequest), name: "overlayHideRequest", object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ArgumentOverlayView.onOverlayUnhideRequest), name: "overlayUnhideRequest", object: nil)
     
   }
   

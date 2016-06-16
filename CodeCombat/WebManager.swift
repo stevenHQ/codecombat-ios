@@ -32,7 +32,7 @@ class WebManager: NSObject, WKScriptMessageHandler, WKNavigationDelegate {
   }
   
   func checkReachibility() {
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("reachibilityChanged:"), name: kReachabilityChangedNotification, object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(WebManager.reachibilityChanged(_:)), name: kReachabilityChangedNotification, object: nil)
     hostReachibility = Reachability(hostName: "reindeerjob.com")
     hostReachibility.startNotifier()
   }
@@ -52,9 +52,9 @@ class WebManager: NSObject, WKScriptMessageHandler, WKNavigationDelegate {
     operationQueue = NSOperationQueue()
     scriptMessageNotificationCenter = NSNotificationCenter()
     instantiateWebView()
-    subscribe(self, channel: "application:error", selector: "onJSError:")
-    subscribe(self, channel: "router:navigated", selector: Selector("onNavigated:"))
-    webKitCheckupTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("checkWebKit"), userInfo: nil, repeats: true)
+    subscribe(self, channel: "application:error", selector: #selector(WebManager.onJSError(_:)))
+    subscribe(self, channel: "router:navigated", selector: #selector(WebManager.onNavigated(_:)))
+    webKitCheckupTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(WebManager.checkWebKit), userInfo: nil, repeats: true)
   }
   
   private func instantiateWebView() {

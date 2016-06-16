@@ -31,7 +31,7 @@ class TomeInventoryViewController: UIViewController, UIScrollViewDelegate, UIGes
     
     let DragAndDropRecognizer = UIPanGestureRecognizer(
       target: self,
-      action: "handleDrag:")
+      action: #selector(TomeInventoryViewController.handleDrag(_:)))
     DragAndDropRecognizer.delegate = self
     inventoryView.addGestureRecognizer(DragAndDropRecognizer)
     inventoryView.panGestureRecognizer.requireGestureRecognizerToFail(DragAndDropRecognizer)

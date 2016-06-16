@@ -17,7 +17,7 @@ class TomeInventoryItemPropertyView: UIButton {
     self.item = item
     self.property = property
     buildSubviews()
-    addTarget(self, action: Selector("onTapped:"), forControlEvents: .TouchUpInside)
+    addTarget(self, action: #selector(TomeInventoryItemPropertyView.onTapped(_:)), forControlEvents: .TouchUpInside)
   }
   
   required init?(coder aDecoder: NSCoder) {

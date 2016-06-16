@@ -38,12 +38,19 @@ class GameViewController: UIViewController {
 		fatalError("init(coder:) has not been implemented")
 	}
 
+    override func viewWillAppear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameViewController.keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameViewController.keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameViewController.keyboardDidShow(_:)), name:UIKeyboardDidShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameViewController.keyboardDidHide(_:)), name:UIKeyboardDidHideNotification, object: nil)
+    }
 
 	// MARK: - UIViewController
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
+        webView.scrollView.bounces = false
 		view.addSubview(webView)
 
 		NSLayoutConstraint.activateConstraints([
@@ -54,6 +61,11 @@ class GameViewController: UIViewController {
 		])
 	}
 
+    deinit {
+        // 删除键盘监听
+        print("删除键盘监听")
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
 
 	// MARK: - Actions
 
@@ -67,6 +79,36 @@ class GameViewController: UIViewController {
 	private func updateUser() {
 		webView.user = user
 	}
+    
+    /// 监听键盘收回
+    func keyboardWillShow(notification: NSNotification) {
+        print("键盘即将弹出")
+    
+    }
+    
+    /// 监听键盘收回
+    func keyboardWillHide(notification: NSNotification) {
+        print("键盘即将收回")
+
+    }
+    
+    /// 监听键盘弹出
+    func keyboardDidShow(notification: NSNotification) {
+        print("键盘已经弹出")
+        
+        let info  = notification.userInfo!
+        let value: AnyObject = info[UIKeyboardFrameEndUserInfoKey]!
+        
+        let rawFrame = value.CGRectValue()
+        let keyboardFrame = view.convertRect(rawFrame, fromView: nil)
+    }
+    
+    /// 监听键盘收回
+    func keyboardDidHide(notification: NSNotification) {
+        print("键盘已经收回")
+
+    }
+
 
 //  var webManager = WebManager.sharedInstance
 //  var webView: WKWebView = WebManager.sharedInstance.webView!

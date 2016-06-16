@@ -366,6 +366,7 @@ class GDWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
         super.viewDidLoad()
         
         // Set up toolbarContainer
+        webView.scrollView.bounces = false
         self.view.addSubview(toolbarContainer)
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|-0-[toolbarContainer]-0-|", options: [], metrics: nil, views: ["toolbarContainer": toolbarContainer]))
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:[toolbarContainer]-0-|", options: [], metrics: nil, views: ["toolbarContainer": toolbarContainer]))

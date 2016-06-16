@@ -40,17 +40,17 @@ class PlayViewController: UIViewController {
     super.viewDidLoad()
     listenToNotifications()
     setupViews()
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("onWebViewReloadedFromCrash"), name: "webViewReloadedFromCrash", object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PlayViewController.onWebViewReloadedFromCrash), name: "webViewReloadedFromCrash", object: nil)
   }
   
   private func listenToNotifications() {
     //webManager.subscribe(self, channel: "sprite:speech-updated", selector: Selector("onSpriteSpeechUpdated:"))
-    webManager.subscribe(self, channel: "tome:spell-loaded", selector: Selector("onTomeSpellLoaded:"))
-    webManager.subscribe(self, channel: "tome:winnability-updated", selector: Selector("onTomeWinnabilityUpdated:"))
+    webManager.subscribe(self, channel: "tome:spell-loaded", selector: #selector(PlayViewController.onTomeSpellLoaded(_:)))
+    webManager.subscribe(self, channel: "tome:winnability-updated", selector: #selector(PlayViewController.onTomeWinnabilityUpdated(_:)))
     let nc = NSNotificationCenter.defaultCenter()
     //additional notifications are listened to below concerning undo manager in setupEditor
-    nc.addObserver(self, selector: Selector("setUndoRedoEnabled"), name: "textEdited", object: nil)
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("onTextStorageFinishedTopLevelEditing"), name: "textStorageFinishedTopLevelEditing", object: nil)
+    nc.addObserver(self, selector: #selector(PlayViewController.setUndoRedoEnabled), name: "textEdited", object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PlayViewController.onTextStorageFinishedTopLevelEditing), name: "textStorageFinishedTopLevelEditing", object: nil)
   }
   
   func unsubscribeFromEverything() {
@@ -123,8 +123,8 @@ class PlayViewController: UIViewController {
     editorContainerView.addSubview(textViewController.textView)
     let undoManager = textViewController.textStorage.undoManager
     let nc = NSNotificationCenter.defaultCenter()
-    nc.addObserver(self, selector: Selector("setUndoRedoEnabled"), name: NSUndoManagerDidUndoChangeNotification, object: undoManager)
-    nc.addObserver(self, selector: Selector("setUndoRedoEnabled"), name: NSUndoManagerDidRedoChangeNotification, object: undoManager)
+    nc.addObserver(self, selector: #selector(PlayViewController.setUndoRedoEnabled), name: NSUndoManagerDidUndoChangeNotification, object: undoManager)
+    nc.addObserver(self, selector: #selector(PlayViewController.setUndoRedoEnabled), name: NSUndoManagerDidRedoChangeNotification, object: undoManager)
   }
 
   func setupWebView() {

@@ -44,7 +44,8 @@ class GameWebView: WKWebView {
 			configuration.userContentController.addUserScript(userScript)
 
 			if let URL = NSURL(string: "/play", relativeToURL: rootURL) {
-				loadRequest(NSURLRequest(URL: URL))
+//				loadRequest(NSURLRequest(URL: URL))
+                loadURL(URL)
 			}
 		}
 	}
@@ -62,6 +63,11 @@ class GameWebView: WKWebView {
 
 		configuration.userContentController.addScriptMessageHandler(self, name: "notification")
 	}
+
+    func loadURL(URL: NSURL, cachePolicy: NSURLRequestCachePolicy = .UseProtocolCachePolicy, timeoutInterval: NSTimeInterval = 2) {
+        loadRequest(NSURLRequest(URL: URL, cachePolicy: cachePolicy, timeoutInterval: timeoutInterval))
+    }
+
 }
 
 

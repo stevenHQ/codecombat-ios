@@ -36,8 +36,8 @@ class SignInViewController: UIViewController {
 		modal.translatesAutoresizingMaskIntoConstraints = false
 		modal.usernameTextField.delegate = self
 		modal.passwordTextField.delegate = self
-		modal.signInButton.addTarget(self, action: "signIn:", forControlEvents: .TouchUpInside)
-		modal.signUpLaterButton.addTarget(self, action: "signUpLater:", forControlEvents: .TouchUpInside)
+		modal.signInButton.addTarget(self, action: #selector(SignInViewController.signIn(_:)), forControlEvents: .TouchUpInside)
+		modal.signUpLaterButton.addTarget(self, action: #selector(SignInViewController.signUpLater(_:)), forControlEvents: .TouchUpInside)
 		view.addSubview(modal)
 
 		modalTopConstraint = NSLayoutConstraint(item: modal, attribute: .Top, relatedBy: .Equal, toItem: view, attribute: .Top, multiplier: 1, constant: 64)
@@ -52,7 +52,7 @@ class SignInViewController: UIViewController {
 			modalTopConstraint
 		])
 
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillChangeFrame:", name: UIKeyboardWillChangeFrameNotification, object: nil)
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SignInViewController.keyboardWillChangeFrame(_:)), name: UIKeyboardWillChangeFrameNotification, object: nil)
 	}
 
 

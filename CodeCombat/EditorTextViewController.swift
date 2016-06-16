@@ -33,20 +33,20 @@ class EditorTextViewController: UIViewController, UITextViewDelegate, UIGestureR
   }
   
   private func setupGestureRecognizers() {
-    dragGestureRecognizer = UIPanGestureRecognizer(target: self, action: "onDrag:")
+    dragGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(EditorTextViewController.onDrag(_:)))
     dragGestureRecognizer.delegate = self
-    tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "onTap:")
+    tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(EditorTextViewController.onTap(_:)))
     tapGestureRecognizer.delegate = self
     tapGestureRecognizer.requireGestureRecognizerToFail(dragGestureRecognizer)
   }
   
   func setupSubscriptionsAndObservers() {
-    WebManager.sharedInstance.subscribe(self, channel: "tome:highlight-line", selector: Selector("onSpellStatementIndexUpdated:"))
-    WebManager.sharedInstance.subscribe(self, channel: "problem:problem-created", selector: Selector("onProblemCreated:"))
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("onCodeRun"), name: "codeRun", object: nil)
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("onCodeReset"), name: "codeReset", object: nil)
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("onTextStorageFinishedTopLevelEditing"), name: "textStorageFinishedTopLevelEditing", object: nil)
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("onKeyboardHide"), name: UIKeyboardDidHideNotification, object: nil)
+    WebManager.sharedInstance.subscribe(self, channel: "tome:highlight-line", selector: #selector(EditorTextViewController.onSpellStatementIndexUpdated(_:)))
+    WebManager.sharedInstance.subscribe(self, channel: "problem:problem-created", selector: #selector(EditorTextViewController.onProblemCreated(_:)))
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(EditorTextViewController.onCodeRun), name: "codeRun", object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(EditorTextViewController.onCodeReset), name: "codeReset", object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(EditorTextViewController.onTextStorageFinishedTopLevelEditing), name: "textStorageFinishedTopLevelEditing", object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(EditorTextViewController.onKeyboardHide), name: UIKeyboardDidHideNotification, object: nil)
   }
   
   deinit {

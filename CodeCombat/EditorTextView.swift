@@ -264,7 +264,7 @@ class EditorTextView: UITextView, NSLayoutManagerDelegate {
       gutterAnnotation.imageView!.contentMode = UIViewContentMode.ScaleAspectFit
       gutterAnnotation.frame = frame
       gutterAnnotation.imageView!.frame = frame
-      gutterAnnotation.addTarget(self, action: Selector("displayProblemErrorMessageFromView:"), forControlEvents: UIControlEvents.TouchUpInside)
+      gutterAnnotation.addTarget(self, action: #selector(EditorTextView.displayProblemErrorMessageFromView(_:)), forControlEvents: UIControlEvents.TouchUpInside)
       gutterAnnotation.userInteractionEnabled = true
       currentProblemGutterLineAnnotations[lineNumber] = gutterAnnotation
       addSubview(gutterAnnotation)
