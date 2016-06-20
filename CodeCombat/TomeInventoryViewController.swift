@@ -45,7 +45,7 @@ class TomeInventoryViewController: UIViewController, UIScrollViewDelegate, UIGes
   
   func setUpInventory() {
     let subviewsToRemove = inventoryView.subviews 
-    for var index = subviewsToRemove.count - 1; index >= 0; --index {
+    for var index = subviewsToRemove.count - 1; index >= 0; index -= 1 {
       subviewsToRemove[index].removeFromSuperview()
     }
     var itemHeight = 0

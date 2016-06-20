@@ -91,7 +91,7 @@ struct User {
             else {
                 return nil
         }
-		return NSURLProtectionSpace(host: host, port: 0, `protocol`: rootURL.scheme, realm: nil, authenticationMethod: nil)
+		return NSURLProtectionSpace(host: host, port: 0, protocol: rootURL.scheme, realm: nil, authenticationMethod: nil)
 	}()
 
 	private static func randomPassword() -> String {

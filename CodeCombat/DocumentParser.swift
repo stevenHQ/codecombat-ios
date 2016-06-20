@@ -38,7 +38,7 @@ class NodeHighlighter {
   func findScope(searchRange:NSRange, node:DocumentNode!) -> DocumentNode! {
     var idx = 0
     //TODO:Optimize through binary search
-    for var i = 0; i < node.children.count; i++ {
+    for i in 0 ..< node.children.count {
       if node.children[i].range.location >= searchRange.location || rangeCoversRange(node.children[i].range,b: searchRange) {
         idx = i
         break
@@ -58,7 +58,7 @@ class NodeHighlighter {
         }
         return findScope(searchRange, node: node.children[idx])
       }
-      idx++
+      idx += 1
     }
     if node !== lastScopeNode && rangeCoversRange(node.range, b: searchRange) && node.name != nil && node.name != "" {
       if lastScopeBuf.length > 0 {
@@ -286,7 +286,7 @@ class Language {
   
   func tweak() {
     rootPattern.tweak(self)
-    for (patternID, pattern) in repository {
+    for (_, pattern) in repository {
       pattern.tweak(self)
     }
   }
@@ -314,7 +314,7 @@ class LanguageParser {
     rootNode.sourceText = sdata
     rootNode.name = language.scopeName
     var iterations = maxIterations
-    for var i = 0; i < sdata.length && iterations > 0; iterations-- {
+    for var i = 0; i < sdata.length && iterations > 0; iterations -= 1 {
       var (pat, result) = language.rootPattern.cache(sdata, position: i)
       let newLineLocation = sdata.rangeOfCharacterFromSet(NSCharacterSet.newlineCharacterSet(), options: [], range: NSRange(location: i, length: sdata.length - i)).location
       if result == nil {
@@ -322,7 +322,7 @@ class LanguageParser {
       } else if newLineLocation != NSNotFound && newLineLocation <= Int(result!.locationAt(0)) {
         i = newLineLocation
         while i + 1 < sdata.length && (sdata.substringWithRange(NSRange(location: i, length: 1)) == "\n" || sdata.substringWithRange(NSRange(location: i, length: 1)) == "\r") {
-          i++
+          i += 1
         }
       } else {
         let n = pat!.createNode(sdata, pos: i, d: sdata, result: result!)
@@ -334,9 +334,9 @@ class LanguageParser {
     if sdata.length != 0 {
       var lut:[Int] = []
       var j = 0
-      for var i = 0; i < sdata.length; i++ {
+      for _ in 0 ..< sdata.length {
         lut.append(j)
-        j++
+        j += 1
       }
       lut.append(data.length)
       self.patch(lut, node: rootNode)
@@ -420,7 +420,7 @@ class Pattern {
         return (nil,nil)
       }
       if cachedMatch.bodyRange().location >= position && cachedPattern.cachedPattern != nil {
-        hits++
+        hits += 1
         return (cachedPattern, cachedMatch)
       }
     } else {
@@ -431,7 +431,7 @@ class Pattern {
         cachedPatterns.append(pattern)
       }
     } 
-    misses++
+    misses += 1
     var pat:Pattern? = nil
     var result:OnigResult?
     if match?.regex != nil {
@@ -487,7 +487,7 @@ class Pattern {
             break
           }
         }
-        i++
+        i += 1
       } else {
         //pop the cached pattern
         cachedPatterns.removeAtIndex(i)
@@ -501,13 +501,13 @@ class Pattern {
     //This function needs a lot of work
     //create a node per match result
     if capt.count > 0 {
-      for var capNumber = 1; UInt(capNumber) < result.count(); capNumber++ {
+      for var capNumber = 1; UInt(capNumber) < result.count(); capNumber += 1 {
         if result.stringAt(UInt(capNumber)) == "" {
           continue
         }
         //println(result.stringAt(UInt(capNumber)))
         //println("Capture \(capNumber)")
-        let capRange = result.rangeAt(UInt(capNumber))
+        _ = result.rangeAt(UInt(capNumber))
         //println("Range: Location:\(capRange.location), length: \(capRange.length)")
         let child = DocumentNode()
         var cap:Capture! = nil

@@ -265,7 +265,7 @@ class WebManager: NSObject, WKScriptMessageHandler, WKNavigationDelegate {
       webKitCheckupsMissed = -1
       reloadWebView()
     }
-    ++webKitCheckupsMissed;
+    webKitCheckupsMissed += 1;
     evaluateJavaScript("2 + 2;", completionHandler: onWebKitCheckupAnswered)
   }
   

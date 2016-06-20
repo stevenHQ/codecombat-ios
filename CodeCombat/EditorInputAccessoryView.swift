@@ -61,28 +61,28 @@ class EditorInputAccessoryView:UIView {
   
   func expandSelectionLeft() {
     if parentTextView.selectedRange.location > 0 {
-      parentTextView.selectedRange.location--
-      parentTextView.selectedRange.length++
+      parentTextView.selectedRange.location -= 1
+      parentTextView.selectedRange.length += 1
     }
   }
   
   func expandSelectionRight() {
     if parentTextView.selectedRange.location < parentTextView.textStorage.length {
-      parentTextView.selectedRange.length++
+      parentTextView.selectedRange.length += 1
     }
   }
   
   func moveCursorLeft() {
     if parentTextView.selectedRange.location > 0 {
-      parentTextView.selectedRange.location--
+      parentTextView.selectedRange.location -= 1
     }
   }
   
   func moveCursorRight() {
     if parentTextView.selectedRange.location < parentTextView.textStorage.length {
-      parentTextView.selectedRange.location++
+      parentTextView.selectedRange.location += 1
       if parentTextView.selectedRange.length > 0 {
-        parentTextView.selectedRange.length--
+        parentTextView.selectedRange.length -= 1
       }
     }
   }

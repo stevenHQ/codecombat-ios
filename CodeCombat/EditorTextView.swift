@@ -325,7 +325,7 @@ class EditorTextView: UITextView, NSLayoutManagerDelegate {
     let glyphsToShow = layoutManager.glyphRangeForCharacterRange(textRange,
       actualCharacterRange: nil)
     var numberOfLinesBeforeVisible = 0
-    for var index = 0; index < textRange.location; numberOfLinesBeforeVisible++ {
+    for var index = 0; index < textRange.location; numberOfLinesBeforeVisible += 1 {
       index = NSMaxRange((storage.string as NSString).lineRangeForRange(NSRange(location: index, length: 0)))
     }
     var lineNumber = numberOfLinesBeforeVisible
@@ -338,7 +338,7 @@ class EditorTextView: UITextView, NSLayoutManagerDelegate {
         let paraRange = (storage.string as NSString).paragraphRangeForRange(charRange)
         //To avoid drawing numbers on wrapped lines
         if charRange.location == paraRange.location {
-          lineNumber++
+          lineNumber += 1
           if targetLineNumber == lineNumber {
             lineFragmentRect = aUsedRect
           }
@@ -369,7 +369,7 @@ class EditorTextView: UITextView, NSLayoutManagerDelegate {
         let charRange = layoutManager.characterRangeForGlyphRange(glyphRange, actualGlyphRange: nil)
         let paraRange = (storage.string as NSString).paragraphRangeForRange(charRange)
         if charRange.location == paraRange.location {
-          currentLineNumber++
+          currentLineNumber += 1
         }
     }
     layoutManager.enumerateLineFragmentsForGlyphRange(glyphsToShow,
@@ -394,7 +394,7 @@ class EditorTextView: UITextView, NSLayoutManagerDelegate {
         let charRange = layoutManager.characterRangeForGlyphRange(glyphRange, actualGlyphRange: nil)
         let paraRange = (storage.string as NSString).paragraphRangeForRange(charRange)
         if charRange.location == paraRange.location {
-          currentLineNumber++
+          currentLineNumber += 1
           if lineNumber == currentLineNumber {
             characterIndex = layoutManager.characterIndexForGlyphAtIndex(glyphRange.location)
             stop.initialize(true)
@@ -417,7 +417,7 @@ class EditorTextView: UITextView, NSLayoutManagerDelegate {
     return NSRange(location:0, length: 0)
   }
   
-  func lineNumberUnderPoint(var point:CGPoint) -> Int {
+  func lineNumberUnderPoint( point:CGPoint) -> Int {
     //point.y += lineSpacing
     let storage = textStorage as! EditorTextStorage
     let Context = UIGraphicsGetCurrentContext()
@@ -436,9 +436,9 @@ class EditorTextView: UITextView, NSLayoutManagerDelegate {
         let charRange = layoutManager.characterRangeForGlyphRange(glyphRange, actualGlyphRange: nil)
         let paraRange = (storage.string as NSString).paragraphRangeForRange(charRange)
         if charRange.location == paraRange.location {
-          currentLineNumber++
+          currentLineNumber += 1
         } else {
-          numberOfExtraLines++
+          numberOfExtraLines += 1
         }
         let startY = aUsedRect.origin.y
         if point.y >= startY && point.y < startY + aUsedRect.height {
@@ -473,11 +473,11 @@ class EditorTextView: UITextView, NSLayoutManagerDelegate {
     func lineFragmentClosure(aRect:CGRect, aUsedRect:CGRect,
       textContainer:NSTextContainer!, glyphRange:NSRange,
       stop:UnsafeMutablePointer<ObjCBool>) -> Void {
-        totalEnumerations++
+        totalEnumerations += 1
         let charRange = layoutManager.characterRangeForGlyphRange(glyphRange, actualGlyphRange: nil)
         let paraRange = (storage.string as NSString).paragraphRangeForRange(charRange)
         if charRange.location == paraRange.location {
-          currentLineNumber++
+          currentLineNumber += 1
           if currentLineNumber == lineNumber {
             boundingRect = layoutManager.boundingRectForGlyphRange(layoutManager.glyphRangeForCharacterRange(paraRange, actualCharacterRange: nil), inTextContainer: textContainer)
             boundingRect!.origin.x = 0
@@ -487,11 +487,11 @@ class EditorTextView: UITextView, NSLayoutManagerDelegate {
           }
         } else {
           if stoppedOnEnumeration != -1 {
-            stoppedOnEnumeration++
+            stoppedOnEnumeration += 1
           }
           let characterRangeString = (storage.string as NSString).substringWithRange(charRange).stringByTrimmingCharactersInSet(NSCharacterSet.newlineCharacterSet())
           if characterRangeString.characters.count > 0 {
-            numberOfExtraLines++
+            numberOfExtraLines += 1
           }
         }
         
@@ -527,7 +527,7 @@ class EditorTextView: UITextView, NSLayoutManagerDelegate {
     var numberOfLinesBeforeVisible = 0
     //calculate bounds
     print("Calculating bounds... \(bounds.origin.y)")
-    for var index = 0; index < textRange.location; numberOfLinesBeforeVisible++ {
+    for var index = 0; index < textRange.location; numberOfLinesBeforeVisible += 1 {
       index = NSMaxRange((storage.string as NSString).lineRangeForRange(NSRange(location: index, length: 0)))
     }
     var lineNumber = numberOfLinesBeforeVisible
@@ -540,7 +540,7 @@ class EditorTextView: UITextView, NSLayoutManagerDelegate {
         let paraRange = (storage.string as NSString).paragraphRangeForRange(charRange)
         //To avoid drawing numbers on wrapped lines
         if charRange.location == paraRange.location {
-          lineNumber++
+          lineNumber += 1
           let LineNumberString = NSString(string: "\(lineNumber)")
           let Size = LineNumberString.sizeWithAttributes(textAttributes)
           let Point = CGPointMake(lineNumberWidth - 4 - Size.width, aRect.origin.y + 8)
@@ -615,7 +615,7 @@ class EditorTextView: UITextView, NSLayoutManagerDelegate {
       let draggedParagraphRange = (editorTextStorage.string as NSString).paragraphRangeForRange(draggedCharacterRange)
       if NSEqualRanges(draggedParagraphRange, fragmentParagraphRange) {
         //This means we've found the dragged line
-        currentLineNumber++
+        currentLineNumber += 1
         return
       }
       if fragmentCharacterRange.location == fragmentParagraphRange.location {
@@ -628,7 +628,7 @@ class EditorTextView: UITextView, NSLayoutManagerDelegate {
         label.backgroundColor = UIColor.clearColor()
         dragOverlayLabels[currentLineNumber] = label
         originalDragOverlayLabelOffsets[currentLineNumber] = label.frame.origin.y
-        currentLineNumber++
+        currentLineNumber += 1
         addSubview(label)
       } else {
         //handle wrapped lines here

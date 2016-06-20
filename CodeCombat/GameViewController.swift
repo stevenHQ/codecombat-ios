@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import WebKit
+
 
 /// Main game view controller. A current user is required to initialize this view controller.
-class GameViewController: UIViewController {
+class GameViewController: UIViewController,WKNavigationDelegate {
 
 	// MARK: - Properties
-
+    var startURL = NSURL(string: "http://hackathon.reindeerjob.com")!
 	var user: User {
 		didSet {
 			updateUser()
@@ -21,6 +23,7 @@ class GameViewController: UIViewController {
 
 	let webView: GameWebView = {
 		let view = GameWebView()
+
 		view.translatesAutoresizingMaskIntoConstraints = false
 		return view
 	}()
@@ -51,6 +54,8 @@ class GameViewController: UIViewController {
 		super.viewDidLoad()
 
         webView.scrollView.bounces = false
+        webView.navigationDelegate = self
+        
 		view.addSubview(webView)
 
 		NSLayoutConstraint.activateConstraints([
@@ -100,7 +105,7 @@ class GameViewController: UIViewController {
         let value: AnyObject = info[UIKeyboardFrameEndUserInfoKey]!
         
         let rawFrame = value.CGRectValue()
-        let keyboardFrame = view.convertRect(rawFrame, fromView: nil)
+        _ = view.convertRect(rawFrame, fromView: nil)
     }
     
     /// 监听键盘收回
@@ -108,7 +113,19 @@ class GameViewController: UIViewController {
         print("键盘已经收回")
 
     }
+    
+//    func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
+//        <#code#>
+//    }
+    
+    func webView(webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        startURL = webView.URL!
+    }
+    
+    func webViewWebContentProcessDidTerminate(webView: WKWebView) {
+        self.webView.loadURL(startURL)
 
+    }
 
 //  var webManager = WebManager.sharedInstance
 //  var webView: WKWebView = WebManager.sharedInstance.webView!
@@ -237,17 +254,17 @@ class GameViewController: UIViewController {
 //    }
 //  }
 //  
-//  override func didReceiveMemoryWarning() {
+  override func didReceiveMemoryWarning() {
 //    memoryWarningsReceived++
 //    if memoryWarningsReceived % 3 == 0 {
 //      showMemoryWarningDialogue()
 //    }
-//    print("----------------- Received Memory Warning --------------")
-//    NSURLCache.sharedURLCache().removeAllCachedResponses()
+    print("----------------- Received Memory Warning --------------")
+    NSURLCache.sharedURLCache().removeAllCachedResponses()
 //    webManager.publish("ipad:memory-warning", event: [:])
-//    super.didReceiveMemoryWarning()
-//  }
-//  
+    super.didReceiveMemoryWarning()
+  }
+//
 //  private func showMemoryWarningDialogue() {
 //    if memoryWarningView != nil {
 //      memoryWarningCountdownCounts = memoryWarningCountdownDuration

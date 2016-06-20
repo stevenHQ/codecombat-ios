@@ -38,7 +38,7 @@ class EditorTextStorage: NSTextStorage {
   }
   
   override func beginEditing() {
-    nestedEditingLevel++
+    nestedEditingLevel += 1
     super.beginEditing()
   }
   override func endEditing() {
@@ -50,11 +50,11 @@ class EditorTextStorage: NSTextStorage {
       NSNotificationCenter.defaultCenter().postNotificationName("textStorageFinishedTopLevelEditing", object: nil)
       highlightSyntax()
     }
-    nestedEditingLevel--
+    nestedEditingLevel -= 1
   }
   
   func characterIsPartOfString(characterIndex:Int) -> Bool {
-    let scopeName = highlighter.scopeName(characterIndex)
+    _ = highlighter.scopeName(characterIndex)
     let node = highlighter.lastScopeNode
     if node == nil {
       return false
@@ -64,13 +64,13 @@ class EditorTextStorage: NSTextStorage {
   
   //caller is responsible for checking if character is part of string
   func stringRangeContainingCharacterIndex(characterIndex:Int) -> NSRange {
-    let scopeName = highlighter.scopeName(characterIndex)
+    _ = highlighter.scopeName(characterIndex)
     let node = highlighter.lastScopeNode
     return node.range
   }
   
   func characterIsPartOfNumber(characterIndex:Int) -> Bool {
-    let scopeName = highlighter.scopeName(characterIndex)
+    _ = highlighter.scopeName(characterIndex)
     let node = highlighter.lastScopeNode
     if node == nil {
       return false
@@ -81,7 +81,7 @@ class EditorTextStorage: NSTextStorage {
   func findArgumentOverlays() -> [(String,NSRange)] {
     var argumentOverlays:[(String,NSRange)] = []
     let documentRange = NSRange(location: 0, length: string.characters.count)
-    for var charIndex = documentRange.location; charIndex < NSMaxRange(documentRange); charIndex++ {
+    for var charIndex = documentRange.location; charIndex < NSMaxRange(documentRange); charIndex += 1 {
       let scopeName = highlighter.scopeName(charIndex)
       let scopes = scopeName.componentsSeparatedByString(" ")
       for scope in scopes {
@@ -92,7 +92,7 @@ class EditorTextStorage: NSTextStorage {
         //Identify the function name here
         if scope.hasPrefix("codecombat.arguments") {
           //go past the ( and into the function name
-          let parentScopeName = highlighter.scopeName(charIndex - 2)
+          _ = highlighter.scopeName(charIndex - 2)
           var functionName = "unsetForLanguage\(language)"
           if language == "python" {
             let parentNode = highlighter.lastScopeNode
@@ -190,7 +190,7 @@ class EditorTextStorage: NSTextStorage {
     let documentRange = NSRange(location: 0, length: string.characters.count)
     
     self.removeAttribute(NSForegroundColorAttributeName, range: documentRange)
-    for var charIndex = documentRange.location; charIndex < NSMaxRange(documentRange); charIndex++ {
+    for var charIndex = documentRange.location; charIndex < NSMaxRange(documentRange); charIndex += 1 {
       let scopeName = highlighter.scopeName(charIndex)
       let scopes = scopeName.componentsSeparatedByString(" ")
       for scope in scopes {

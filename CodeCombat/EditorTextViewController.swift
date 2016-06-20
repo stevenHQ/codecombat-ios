@@ -61,7 +61,7 @@ class EditorTextViewController: UIViewController, UITextViewDelegate, UIGestureR
   func onSpellStatementIndexUpdated(note:NSNotification) {
     if let event = note.userInfo {
       var lineIndex = event["line"]! as! Int
-      lineIndex++
+      lineIndex += 1
       if lineIndex != highlightedLineNumber {
         highlightedLineNumber = lineIndex
         textView.highlightLineNumber(lineIndex)
@@ -73,7 +73,7 @@ class EditorTextViewController: UIViewController, UITextViewDelegate, UIGestureR
     if let event = note.userInfo {
       var lineIndex = event["line"]! as! Int
       let errorText = event["text"]! as! String
-      lineIndex++
+      lineIndex += 1
       textView.addUserCodeProblemGutterAnnotationOnLine(lineIndex, message: errorText)
       textView.highlightUserCodeProblemLine(lineIndex)
     }
@@ -221,12 +221,12 @@ class EditorTextViewController: UIViewController, UITextViewDelegate, UIGestureR
     let draggedOntoLine = textView.lineNumberUnderPoint(location)
     
     var numberOfNewlinesBeforeGlyphIndex = 1
-    for var index = 0; index < nearestGlyphIndex; numberOfNewlinesBeforeGlyphIndex++ {
+    for var index = 0; index < nearestGlyphIndex; numberOfNewlinesBeforeGlyphIndex += 1 {
       index = NSMaxRange((storage.string as NSString).lineRangeForRange(NSRange(location: index, length: 0)))
     }
     
     var totalLinesInDoc = 1
-    for var index = 0; index < storage.string.characters.count; totalLinesInDoc++ {
+    for var index = 0; index < storage.string.characters.count; totalLinesInDoc += 1 {
       index = NSMaxRange((storage.string as NSString).lineRangeForRange(NSRange(location: index, length: 0)))
     }
     
@@ -264,7 +264,7 @@ class EditorTextViewController: UIViewController, UITextViewDelegate, UIGestureR
     let startOfDraggedLineCharacterIndex = textView.characterIndexForStartOfLine(draggedOntoLine)
     
     if draggedOntoLine > numberOfLinesInDocument {
-      for var i=numberOfLinesInDocument; i < draggedOntoLine; i++ {
+      for _ in numberOfLinesInDocument ..< draggedOntoLine {
         stringToInsert = "\n" + stringToInsert
       }
       storage.replaceCharactersInRange(NSRange(location: startOfDraggedLineCharacterIndex - 1, length: 0), withString: stringToInsert)
@@ -295,7 +295,7 @@ class EditorTextViewController: UIViewController, UITextViewDelegate, UIGestureR
     var indentationLevel = indentationLevelOfLine(lineNumber - 1)
     //58 is ASCII for :
     if firstNonWhitespaceCharacterBeforeCharacterIndex(firstCharacterIndex) == 58 {
-      indentationLevel++
+      indentationLevel += 1
     }
     
     let stringToReturn = String(count: numberOfSpacesForIndentation * indentationLevel, repeatedValue: " " as Character) + rawString
@@ -307,7 +307,7 @@ class EditorTextViewController: UIViewController, UITextViewDelegate, UIGestureR
     let storage = textStorage as EditorTextStorage
     
     var firstNonWhitespaceCharacter = unichar(10)
-    for var charIndex = index; charIndex > 0; charIndex-- {
+    for var charIndex = index; charIndex > 0; charIndex -= 1 {
       let character = (storage.string as NSString).characterAtIndex(charIndex)
       if !NSCharacterSet.whitespaceAndNewlineCharacterSet().characterIsMember(character) {
         firstNonWhitespaceCharacter = character
@@ -343,10 +343,10 @@ class EditorTextViewController: UIViewController, UITextViewDelegate, UIGestureR
       let lines = storage.string.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
       let line = lines[min(lineNumber - 1, lines.count - 1)] as NSString
       var spacesCount = 0
-      for var charIndex = 0; charIndex < line.length; charIndex++ {
+      for charIndex in 0 ..< line.length {
         let character = line.characterAtIndex(charIndex)
         if NSCharacterSet.whitespaceCharacterSet().characterIsMember(character) {
-          spacesCount++
+          spacesCount += 1
         } else {
           break
         }
@@ -483,14 +483,14 @@ class EditorTextViewController: UIViewController, UITextViewDelegate, UIGestureR
   private func removeOneIndentFromCharactersStartingFromLocation(loc:Int) {
     var currentLocation = loc
     if currentLocation == 0 {
-      currentLocation-- //to correct for this script
+      currentLocation -= 1 //to correct for this script
     }
     var stringLength = textStorage.length
     var currentIndentationLevel = -1
     while (currentLocation < stringLength && currentLocation != NSNotFound ) {
       //probably an off by one error
       stringLength = textStorage.length
-      currentLocation++
+      currentLocation += 1
       let lineEndLocation = (textStorage.string as NSString).rangeOfCharacterFromSet(NSCharacterSet.newlineCharacterSet(), options: NSStringCompareOptions(), range: NSRange(location: currentLocation, length: stringLength - (currentLocation))).location
       if lineEndLocation == NSNotFound {
         break
@@ -529,7 +529,7 @@ class EditorTextViewController: UIViewController, UITextViewDelegate, UIGestureR
       let trimmedString = replacedString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
       if trimmedString.characters.count > 0 && trimmedString.substringFromIndex(trimmedString.endIndex.predecessor()) == ":"
         && !trimmedString.hasPrefix("loop:") {
-          replacedLineIndentation++
+          replacedLineIndentation += 1
       }
       //Make it so that if string wasn't indented before and was dragged into indentation zone,
       //it gets indented.
