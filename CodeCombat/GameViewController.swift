@@ -11,7 +11,7 @@ import WebKit
 
 
 /// Main game view controller. A current user is required to initialize this view controller.
-class GameViewController: UIViewController,WKNavigationDelegate {
+class GameViewController: UIViewController,WKNavigationDelegate,WKUIDelegate {
 
 	// MARK: - Properties
     var startURL = NSURL(string: "http://hackathon.reindeerjob.com")!
@@ -30,7 +30,6 @@ class GameViewController: UIViewController,WKNavigationDelegate {
 
 
 	// MARK: - Initializers
-
 	init(user: User) {
 		self.user = user
 		super.init(nibName: nil, bundle: nil)
@@ -41,23 +40,14 @@ class GameViewController: UIViewController,WKNavigationDelegate {
 		fatalError("init(coder:) has not been implemented")
 	}
 
-    override func viewWillAppear(animated: Bool) {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameViewController.keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameViewController.keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameViewController.keyboardDidShow(_:)), name:UIKeyboardDidShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameViewController.keyboardDidHide(_:)), name:UIKeyboardDidHideNotification, object: nil)
-    }
-
 	// MARK: - UIViewController
-
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
         webView.scrollView.bounces = false
         webView.navigationDelegate = self
-        
-		view.addSubview(webView)
 
+		view.addSubview(webView)
 		NSLayoutConstraint.activateConstraints([
 			webView.leadingAnchor.constraintEqualToAnchor(view.leadingAnchor),
 			webView.trailingAnchor.constraintEqualToAnchor(view.trailingAnchor),
@@ -66,65 +56,42 @@ class GameViewController: UIViewController,WKNavigationDelegate {
 		])
 	}
 
-    deinit {
-        // 删除键盘监听
-        print("删除键盘监听")
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        webView.addObserver(self, forKeyPath: "URL", options: .New, context: nil)
+    }
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        webView.removeObserver(self, forKeyPath: "URL")
     }
 
 	// MARK: - Actions
-
 	@objc private func signOut() {
 		User.currentUser = nil
 	}
 
-
 	// MARK: - Private
-
 	private func updateUser() {
 		webView.user = user
 	}
     
-    /// 监听键盘收回
-    func keyboardWillShow(notification: NSNotification) {
-        print("键盘即将弹出")
-    
-    }
-    
-    /// 监听键盘收回
-    func keyboardWillHide(notification: NSNotification) {
-        print("键盘即将收回")
-
-    }
-    
-    /// 监听键盘弹出
-    func keyboardDidShow(notification: NSNotification) {
-        print("键盘已经弹出")
-        
-        let info  = notification.userInfo!
-        let value: AnyObject = info[UIKeyboardFrameEndUserInfoKey]!
-        
-        let rawFrame = value.CGRectValue()
-        _ = view.convertRect(rawFrame, fromView: nil)
-    }
-    
-    /// 监听键盘收回
-    func keyboardDidHide(notification: NSNotification) {
-        print("键盘已经收回")
-
-    }
-    
-//    func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
-//        <#code#>
+//    func webView(webView: WKWebView,  didStartProvisionalNavigation navigation: WKNavigation!) {
+//        startURL = webView.URL!
 //    }
-    
-    func webView(webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        startURL = webView.URL!
+
+    // MARK: KVO
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        guard let keyPath = keyPath else {return}
+        switch keyPath {
+        case "URL":
+            startURL = webView.URL!
+        default:
+            super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
+        }
     }
-    
+
     func webViewWebContentProcessDidTerminate(webView: WKWebView) {
         self.webView.loadURL(startURL)
-
     }
 
 //  var webManager = WebManager.sharedInstance
